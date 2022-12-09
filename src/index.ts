@@ -17,18 +17,11 @@ async function run(): Promise<void> {
     await clone(owner, repo, release);
     info(`Cloned ${repository} to vscode`);
 
-    await exec("ls");
-    await exec("ls", ["../vscode"]);
-    await exec("cat", ["../vscode/package.json"])
     await install();
     info("Installed dependencies");
 
     await patch();
     info(`Patched vscode`);
-    
-    await exec("yarn", ["run"])
-    await exec("yarn", ["run", "--cwd", "../vscode"])
-
 
     await build();
     info("Building VSCode");
