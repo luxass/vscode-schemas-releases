@@ -25,14 +25,15 @@ export async function clone(
     "1",
     "--branch",
     release,
-    `https://github.com/${owner}/${repo}.git`
+    `https://github.com/${owner}/${repo}.git`,
+    "../vscode"
   ]);
 }
 
 export async function install(): Promise<void> {
-  await exec("yarn", ["install", "--cwd", "vscode"]);
+  await exec("yarn", ["install", "--cwd", "../vscode"]);
 }
 
 export async function build(): Promise<void> {
-  await exec("yarn", ["run", "compile", "--cwd", "vscode"]);
+  await exec("yarn", ["run", "compile", "--cwd", "../vscode"]);
 }
