@@ -18,13 +18,13 @@ async function run(): Promise<void> {
     info(`Cloned ${repository} to vscode`);
 
     await exec("ls");
-
+    await exec("ls", ["../vscode"]);
     await install();
     info("Installed dependencies");
 
     await patch();
     info(`Patched vscode`);
-
+    
     await build();
     info("Building VSCode");
   } catch (error) {
