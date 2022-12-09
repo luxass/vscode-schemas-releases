@@ -7,18 +7,21 @@ on:
         description: "Release to build"
         required: true
         type: string
-        
+
   schedule:
     - cron: "0 */6 * * *"
   push:
   pull_request:
 
-env: 
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build-action:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -55,7 +58,10 @@ jobs:
       - name: Build
         run: pnpm build
   build-code:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     needs: build-action
     steps:
       - name: Checkout
@@ -66,3 +72,4 @@ jobs:
         with:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
+          platform: ${{ matrix.os }}

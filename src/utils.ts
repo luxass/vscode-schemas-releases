@@ -34,6 +34,16 @@ export async function install(): Promise<void> {
   await exec("yarn", ["install", "--cwd", "../vscode"]);
 }
 
-export async function build(): Promise<void> {
-  await exec("yarn", ["--cwd", "../vscode", "run", "compile"]);
+export async function build(platform: string): Promise<void> {
+  if (platform === "windows") {
+    platform = "win32-x64";
+  } else if (platform === "linux") {
+    platform = "linux-x64";
+  } else if (platform === "darwin") {
+    platform = "darwin-x64";
+  }
+
+  await exec("yarn", ["--cwd", "../vscode", "gulp", `vscode-${platform}`]);
 }
+
+export async function copyRequiredFiles() {}
