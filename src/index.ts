@@ -24,6 +24,8 @@ async function run(): Promise<void> {
 
     await build();
     info("Building VSCode");
+
+    
   } catch (error) {
     setFailed(error.message);
   }
