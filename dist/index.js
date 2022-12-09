@@ -2194,6 +2194,7 @@ async function run() {
     const release = import_core.default.getInput("release");
     console.log(`Release: ${release}`);
   } catch (error) {
+    console.log(error);
     if (error instanceof Error)
       import_core.default.setFailed(error.message);
   }

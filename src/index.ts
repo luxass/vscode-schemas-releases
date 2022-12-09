@@ -6,6 +6,8 @@ async function run(): Promise<void> {
     console.log(`Release: ${release}`);
     
   } catch (error) {
+    console.log(error);
+    
     if (error instanceof Error) core.setFailed(error.message);
   }
 }
