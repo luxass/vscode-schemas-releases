@@ -65,4 +65,4 @@ jobs:
         uses: ./
         with:
           release: ${{ inputs.release }}
-          repo: microsoft/vscode
+          repository: microsoft/vscode

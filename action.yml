@@ -4,7 +4,7 @@ inputs:
   release:
     description: 'Release to build'
     required: false
-  repo:
+  repository:
     description: 'Repository to build from'
     required: false
     default: 'microsoft/vscode'
