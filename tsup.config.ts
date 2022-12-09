@@ -6,7 +6,7 @@ export default defineConfig({
   format: "cjs",
   clean: true,
   target: "node16",
+  splitting: true,
   bundle: true,
-  treeshake: true,
   noExternal: ["@actions/core"]
 });
