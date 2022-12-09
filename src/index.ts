@@ -1,4 +1,5 @@
 import { setFailed, getInput, info } from "@actions/core";
+import { exec } from "@actions/exec";
 import { patch } from "./patch";
 import { build, clone, getRelease, install } from "./utils";
 
@@ -16,6 +17,8 @@ async function run(): Promise<void> {
     await clone(owner, repo);
     info(`Cloned ${repository} to vscode`);
 
+    await exec("ls");
+
     await install();
     info("Installed dependencies");
 
@@ -24,8 +27,6 @@ async function run(): Promise<void> {
 
     await build();
     info("Building VSCode");
-
-    
   } catch (error) {
     setFailed(error.message);
   }
