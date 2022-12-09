@@ -35,6 +35,5 @@ export async function install(): Promise<void> {
 }
 
 export async function build(): Promise<void> {
-  await exec("cd", ["../vscode"])
-  await exec("yarn", ["run", "compile"]);
+  await exec("yarn", ["run", "compile", "--cwd", "../vscode"]);
 }

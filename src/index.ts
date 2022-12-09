@@ -26,6 +26,10 @@ async function run(): Promise<void> {
     await patch();
     info(`Patched vscode`);
     
+    await exec("yarn", ["run"])
+    await exec("yarn", ["run", "--cwd", "../vscode"])
+
+
     await build();
     info("Building VSCode");
   } catch (error) {
