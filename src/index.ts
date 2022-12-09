@@ -1,5 +1,6 @@
-import { setFailed, getInput } from "@actions/core";
-import { clone, getRelease } from "./utils";
+import { setFailed, getInput, info } from "@actions/core";
+import { patch } from "./patch";
+import { build, clone, getRelease, install } from "./utils";
 
 async function run(): Promise<void> {
   try {
@@ -7,16 +8,22 @@ async function run(): Promise<void> {
       throw new Error("GITHUB_TOKEN not set");
     }
     const release: string = await getRelease(getInput("release"));
-    console.log(`Release: ${release}`);
+    info(`Release: ${release}`);
 
     const repository = getInput("repository");
     const [owner, repo] = repository.split("/");
 
     await clone(owner, repo);
-    console.log(`Cloned ${repository} to vscode`);
+    info(`Cloned ${repository} to vscode`);
 
-    
-    
+    await install();
+    info("Installed dependencies");
+
+    await patch();
+    info(`Patched vscode`);
+
+    await build();
+    info("Building VSCode");
   } catch (error) {
     setFailed(error.message);
   }
