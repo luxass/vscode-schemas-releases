@@ -6,8 +6,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": ["ESNext"]
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
