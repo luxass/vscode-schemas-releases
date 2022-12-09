@@ -6,7 +6,8 @@
     "outDir": "./lib",
     "rootDir": "./src",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "useUnknownInCatchVariables": false
   },
   "include": ["src"],
   "exclude": ["node_modules"]
