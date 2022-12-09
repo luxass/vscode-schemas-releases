@@ -14,7 +14,7 @@ async function run(): Promise<void> {
     const repository = getInput("repository");
     const [owner, repo] = repository.split("/");
 
-    await clone(owner, repo);
+    await clone(owner, repo, release);
     info(`Cloned ${repository} to vscode`);
 
     await exec("ls");

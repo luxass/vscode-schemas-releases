@@ -14,12 +14,23 @@ export async function getRelease(release: string): Promise<string> {
   ).data.tag_name;
 }
 
-export async function clone(owner: string, repo: string): Promise<void> {
-  await exec("git", ["clone", `https://github.com/${owner}/${repo}.git`]);
+export async function clone(
+  owner: string,
+  repo: string,
+  release: string
+): Promise<void> {
+  await exec("git", [
+    "clone",
+    "--depth",
+    "1",
+    "--branch",
+    release,
+    `https://github.com/${owner}/${repo}.git`
+  ]);
 }
 
 export async function install(): Promise<void> {
-  await exec("yarn", ["install", "--cwd", "vscode"])
+  await exec("yarn", ["install", "--cwd", "vscode"]);
 }
 
 export async function build(): Promise<void> {
