@@ -19,6 +19,7 @@ async function run(): Promise<void> {
 
     await exec("ls");
     await exec("ls", ["../vscode"]);
+    await exec("cat", ["../vscode/package.json"])
     await install();
     info("Installed dependencies");
 
