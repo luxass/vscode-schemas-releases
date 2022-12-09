@@ -4,6 +4,10 @@ inputs:
   release:
     description: 'Release to build'
     required: false
+  repo:
+    description: 'Repository to build from'
+    required: false
+    default: 'microsoft/vscode'
 runs:
   using: "node16"
   main: "dist/index.js"

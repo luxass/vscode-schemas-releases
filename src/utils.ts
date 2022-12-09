@@ -1,5 +1,6 @@
 import { getOctokit } from "@actions/github";
 import { GITHUB_TOKEN } from "./env";
+import { exec } from "@actions/exec";
 
 export async function getRelease(release: string): Promise<string> {
   if (release.length > 0) {
@@ -11,4 +12,8 @@ export async function getRelease(release: string): Promise<string> {
       repo: "vscode"
     })
   ).data.tag_name;
+}
+
+export async function clone(owner: string, repo: string): Promise<void> {
+  await exec("git", ["clone", `https://github.com/${owner}/${repo}.git`]);
 }
