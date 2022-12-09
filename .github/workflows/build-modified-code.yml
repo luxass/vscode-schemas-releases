@@ -61,4 +61,4 @@ jobs:
       - name: Build Code
         uses: ./
         with:
-          release: ${{ github.event.inputs.release }}
+          release: ${{ inputs.release }}

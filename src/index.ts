@@ -1,11 +1,13 @@
-import core from "@actions/core";
+import { setFailed, getInput } from "@actions/core";
 
 async function run(): Promise<void> {
   try {
-    const release: string = core.getInput("release");
+    const release: string = getInput("release", {
+      
+    });
     console.log(`Release: ${release}`);
   } catch (error) {
-    core.setFailed(error.message);
+    setFailed(error.message);
   }
 }
 
