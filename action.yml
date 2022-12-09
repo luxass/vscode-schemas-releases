@@ -1,0 +1,10 @@
+name: "Build Modified Visual Studio Code"
+description: 'Builds Visual Studio Code from a specific release'
+inputs:
+  release:
+    description: 'Release to build'
+    required: true
+    
+runs:
+  using: "node16"
+  main: "dist/index.js"
