@@ -7,7 +7,6 @@ on:
         description: "Release to build"
         required: true
         type: string
-        default: "1.73.0"
         
   schedule:
     - cron: "0 */6 * * *"

@@ -4,7 +4,7 @@ inputs:
   release:
     description: 'Release to build'
     required: false
-    
+    default: 'latest'
 runs:
   using: "node16"
   main: "dist/index.js"
