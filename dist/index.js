@@ -23,6 +23,7 @@ var import_core = __toESM(require("@actions/core"));
 async function run() {
   try {
     const release = import_core.default.getInput("release");
+    console.log(`Release: ${release}`);
   } catch (error) {
     if (error instanceof Error)
       import_core.default.setFailed(error.message);

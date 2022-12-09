@@ -3,7 +3,7 @@ description: 'Builds Visual Studio Code from a specific release'
 inputs:
   release:
     description: 'Release to build'
-    required: true
+    required: false
     
 runs:
   using: "node16"

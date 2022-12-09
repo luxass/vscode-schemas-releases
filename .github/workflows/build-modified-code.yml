@@ -7,9 +7,13 @@ on:
         description: "Release to build"
         required: true
         type: string
+  schedule:
+    - cron: "0 */6 * * *"
+  push:
+  pull_request:
 
 jobs:
-  build:
+  build-action:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,3 +47,16 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Build
+        run: pnpm build
+  build-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Code
+        uses: ./
+        with:
+          release: ${{ github.event.inputs.release }}
