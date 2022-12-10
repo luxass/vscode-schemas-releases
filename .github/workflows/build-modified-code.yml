@@ -19,8 +19,9 @@ env:
 
 jobs:
   build-code:
-    env:
-      VSCODE_ARCH: ${{ matrix.vscode_arch }}
+    defaults:
+      run:
+        shell: bash
     strategy:
       fail-fast: false
       matrix:
@@ -35,6 +36,8 @@ jobs:
               - arm64
           - os: macos-latest
             vscode_arch: x64
+    env:
+      VSCODE_ARCH: ${{ matrix.vscode_arch }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
