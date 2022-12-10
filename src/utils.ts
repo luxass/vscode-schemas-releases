@@ -1,6 +1,7 @@
 import { getOctokit } from "@actions/github";
 import { GITHUB_TOKEN } from "./env";
 import { exec } from "@actions/exec";
+import { setFailed } from "@actions/core";
 
 export async function getRelease(release: string): Promise<string> {
   if (release.length > 0) {
@@ -41,6 +42,8 @@ export async function build(platform: string): Promise<void> {
     platform = "linux-x64";
   } else if (platform === "darwin") {
     platform = "darwin-x64";
+  } else {
+    setFailed(`Invalid platform: ${platform}`);
   }
 
   await exec("yarn", ["--cwd", "../vscode", "gulp", `vscode-${platform}`]);
