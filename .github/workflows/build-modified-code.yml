@@ -29,7 +29,6 @@ jobs:
             platform: windows
           - os: macos-latest
             platform: darwin
-
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -45,3 +44,4 @@ jobs:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
           platform: ${{ matrix.platform }}
+        
