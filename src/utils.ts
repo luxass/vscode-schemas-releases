@@ -109,12 +109,42 @@ export async function build(): Promise<void> {
     script = `linux-${VSCODE_ARCH}-min-ci`;
   }
 
-  await exec("yarn", ["--cwd", "../vscode", "gulp", `vscode-${script}`]);
+  if (VSCODE_ARCH === "ia32") {
+    await exec("yarn", [
+      "--cwd",
+      "../vscode",
+      "gulp",
+      "--",
+      `vscode-${script}`
+    ]);
+  } else {
+    await exec("yarn", ["--cwd", "../vscode", "gulp", `vscode-${script}`]);
+  }
 
   if (reh) {
-    await exec("yarn", ["--cwd", "../vscode", "gulp", "minify-vscode-reh"]);
-    await exec("yarn", ["--cwd", "../vscode", "gulp", `vscode-reh-${script}`]);
+    if (VSCODE_ARCH === "ia32") {
+      await exec("yarn", [
+        "--cwd",
+        "../vscode",
+        "gulp",
+        "--",
+        "minify-vscode-reh"
+      ]);
+      await exec("yarn", [
+        "--cwd",
+        "../vscode",
+        "gulp",
+        "--",
+        `vscode-reh-${script}`
+      ]);
+    } else {
+      await exec("yarn", ["--cwd", "../vscode", "gulp", "minify-vscode-reh"]);
+      await exec("yarn", [
+        "--cwd",
+        "../vscode",
+        "gulp",
+        `vscode-reh-${script}`
+      ]);
+    }
   }
 }
-
-export async function copyRequiredFiles() {}

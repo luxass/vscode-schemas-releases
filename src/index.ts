@@ -1,12 +1,9 @@
-import { getBooleanInput, getInput, info, setFailed } from "@actions/core";
-import { VSCODE_ARCH } from "./env";
+import { getInput, info, setFailed } from "@actions/core";
 import { patch } from "./patch";
 import {
   build,
   clone,
-  copyRequiredFiles,
   getAllReleases,
-  getLatestRelease,
   install,
   parseRelease
 } from "./utils";
