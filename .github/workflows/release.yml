@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  workflow_run:
+    workflows: ["Build Modified Visual Studio Code"]
+    types:
+      - completed
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: List all files
+        run: |
+          ls
+
+      # - name: Download Release
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: release
+      #     path: release
+
+      # - name: Upload Release
+      #   uses: actions/upload-release-asset@v2
+      #   with:
+      #     upload_url: ${{ github.event.workflow_run.artifacts_url }}
+      #     asset_path: ./release/*
+      #     asset_name: ${{ github.event.workflow_run.head_branch }}-${{ github.event.workflow_run.head_sha }}-${{ github.event.workflow_run.head_commit.message }}
+      #     asset_content_type: application/zip
+
+      # - name: Create Release
+      #   uses: actions/create-release@v1
+      #   with:
+      #     tag_name: ${{ github.event.workflow_run.head_branch }}-${{ github.event.workflow_run.head_sha }}-${{ github.event.workflow_run.head_commit.message }}
+      #     release_name: ${{ github.event.workflow_run.head_branch }}-${{ github.event.workflow_run.head_sha }}-${{ github.event.workflow_run.head_commit.message }}
+      #     body: ${{ github.event.workflow_run.head_branch }}-${{ github.event.workflow_run.head_sha }}-${{ github.event.workflow_run.head_commit.message }}
+      #     draft: false
+      #     prerelease: false
+
+      # - name: Delete Release
+      #   uses:
