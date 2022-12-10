@@ -1,0 +1,49 @@
+name: Build Modified Visual Studio Code - Linux
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: "Release to build"
+        required: true
+        type: string
+  workflow_run:
+    workflows: ["Build Action"]
+    types:
+      - completed
+  schedule:
+    - cron: "0 */6 * * *"
+  push:
+    paths-ignore:
+      - "src/**"
+      - "action.yml"
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build-code:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - vscode_arch: x64
+    env:
+      VSCODE_ARCH: ${{ matrix.vscode_arch }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Download Linux Dependencies
+        run: |
+          echo "Installing Linux dependencies"
+      - name: Build Code
+        uses: ./
+        with:
+          release: ${{ inputs.release }}
+          repository: microsoft/vscode
