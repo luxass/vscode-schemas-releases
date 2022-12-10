@@ -55,6 +55,11 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           echo "Installing Linux dependencies"
+      - name: Test!!!!!!
+        if: runner.os != 'Windows'
+        run: |
+          echo ${{ matrix.vscode_arch }}
+          echo ${{ env.VSCODE_ARCH }}
       - name: Build Code
         uses: ./
         with:
