@@ -32,7 +32,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         include:
           - os: ubuntu-latest
-            vscode_arch: x64
+            vscode_arch:
+              - x64
+              - arm64
           - os: windows-latest
             vscode_arch:
               - x64
