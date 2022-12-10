@@ -7,11 +7,12 @@ on:
         description: "Release to build"
         required: true
         type: string
-
+  workflow_run:
+    workflows: ["Build Action"]
+    types:
+      - completed
   schedule:
     - cron: "0 */6 * * *"
-  push:
-  pull_request:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
