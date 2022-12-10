@@ -59,15 +59,39 @@ export async function install(): Promise<void> {
 export async function prepareBuild(): Promise<void> {
   await exec("yarn", ["--cwd", "../vscode", "run", "monaco-compile-check"]);
   await exec("yarn", ["--cwd", "../vscode", "run", "valid-layers-check"]);
-  await exec("yarn", ["--cwd", "../vscode", "gulp", "compile-build"]);
-  await exec("yarn", ["--cwd", "../vscode", "gulp", "compile-extension-media"]);
-  await exec("yarn", [
-    "--cwd",
-    "../vscode",
-    "gulp",
-    "compile-extensions-build"
-  ]);
-  await exec("yarn", ["--cwd", "../vscode", "gulp", "minify-vscode"]);
+  if (VSCODE_ARCH === "ia32") {
+    await exec("yarn", ["--cwd", "../vscode", "gulp", "--", "compile-build"]);
+    await exec("yarn", [
+      "--cwd",
+      "../vscode",
+      "gulp",
+      "--",
+      "compile-extension-media"
+    ]);
+    await exec("yarn", [
+      "--cwd",
+      "../vscode",
+      "gulp",
+      "--",
+      "compile-extensions-build"
+    ]);
+    await exec("yarn", ["--cwd", "../vscode", "gulp", "--", "minify-vscode"]);
+  } else {
+    await exec("yarn", ["--cwd", "../vscode", "gulp", "compile-build"]);
+    await exec("yarn", [
+      "--cwd",
+      "../vscode",
+      "gulp",
+      "compile-extension-media"
+    ]);
+    await exec("yarn", [
+      "--cwd",
+      "../vscode",
+      "gulp",
+      "compile-extensions-build"
+    ]);
+    await exec("yarn", ["--cwd", "../vscode", "gulp", "minify-vscode"]);
+  }
 }
 
 export async function build(): Promise<void> {
@@ -86,12 +110,11 @@ export async function build(): Promise<void> {
   }
 
   await exec("yarn", ["--cwd", "../vscode", "gulp", `vscode-${script}`]);
-  
+
   if (reh) {
     await exec("yarn", ["--cwd", "../vscode", "gulp", "minify-vscode-reh"]);
     await exec("yarn", ["--cwd", "../vscode", "gulp", `vscode-reh-${script}`]);
   }
-
 }
 
 export async function copyRequiredFiles() {}
