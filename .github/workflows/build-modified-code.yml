@@ -15,7 +15,7 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+  
 jobs:
   build-action:
     strategy:
@@ -59,8 +59,17 @@ jobs:
         run: pnpm build
   build-code:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            platform: linux
+          - os: windows-latest
+            platform: win32
+          - os: macos-latest
+            platform: darwin
+
     runs-on: ${{ matrix.os }}
     needs: build-action
     steps:
@@ -72,4 +81,4 @@ jobs:
         with:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
-          platform: ${{ matrix.os }}
+          platform: ${{ matrix.platform }}
