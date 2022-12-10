@@ -38,8 +38,8 @@ async function run(): Promise<void> {
     await patch();
     info(`Patched vscode`);
 
-    // await build(platform);
-    // info("Building VSCode");
+    await build();
+    info("Building VSCode");
   } catch (error) {
     setFailed(error.message);
   }
