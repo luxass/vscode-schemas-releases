@@ -26,8 +26,8 @@ async function run(): Promise<void> {
     await install();
     info("Installed dependencies");
 
-    // await patch();
-    // info(`Patched vscode`);
+    await patch();
+    info(`Patched vscode`);
 
     // await build(platform);
     // info("Building VSCode");
