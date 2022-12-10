@@ -25,11 +25,16 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         include:
           - os: ubuntu-latest
-            platform: linux
+            arch: x64
           - os: windows-latest
-            platform: windows
+            arch:
+              - x64
+              - ia32
+              - arm64
           - os: macos-latest
-            platform: darwin
+            arch: x64
+    env:
+      ARCH: ${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -44,5 +49,3 @@ jobs:
         with:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
-          platform: ${{ matrix.platform }}
-        
