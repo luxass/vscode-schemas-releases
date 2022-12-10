@@ -1,0 +1,18 @@
+--- a/src/vs/platform/jsonschemas/common/jsonContributionRegistry.ts	2022-12-10 17:50:08.972846863 +0100
++++ b/src/vs/platform/jsonschemas/common/jsonContributionRegistry.ts	2022-12-10 17:47:06.079920072 +0100
+@@ -50,7 +50,7 @@
+ 
+ class JSONContributionRegistry implements IJSONContributionRegistry {
+ 
+-	private schemasById: { [id: string]: IJSONSchema };
++	public schemasById: { [id: string]: IJSONSchema };
+ 
+ 	private readonly _onDidChangeSchema = new Emitter<string>();
+ 	readonly onDidChangeSchema: Event<string> = this._onDidChangeSchema.event;
+@@ -78,3 +78,5 @@
+ 
+ const jsonContributionRegistry = new JSONContributionRegistry();
+ platform.Registry.add(Extensions.JSONContribution, jsonContributionRegistry);
++
++setTimeout(_ => console.log(jsonContributionRegistry.schemasById), 20000);
+\ No newline at end of file

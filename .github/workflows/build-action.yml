@@ -1,10 +1,11 @@
 name: Build Action
 
 on:
-  push:
-    paths:
-      - "src/**"
-      - "action.yml"
+  workflow_dispatch:
+  # push:
+  #   paths:
+  #     - "src/**"
+  #     - "action.yml"
 
 jobs:
   build:

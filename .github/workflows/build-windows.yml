@@ -14,9 +14,6 @@ on:
   schedule:
     - cron: "0 */6 * * *"
   push:
-    paths-ignore:
-      - "src/**"
-      - "action.yml"
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

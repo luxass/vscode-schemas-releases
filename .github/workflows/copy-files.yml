@@ -1,0 +1,14 @@
+name: Copy Files & Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Copy Files
+        run: |
+          echo "Copying files"

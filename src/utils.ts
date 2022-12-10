@@ -1,18 +1,41 @@
+import { setFailed } from "@actions/core";
+import { exec } from "@actions/exec";
 import { getOctokit } from "@actions/github";
 import { GITHUB_TOKEN } from "./env";
-import { exec } from "@actions/exec";
-import { setFailed } from "@actions/core";
+import { octokit } from "./octokit";
 
-export async function getRelease(release: string): Promise<string> {
-  if (release.length > 0) {
-    return release;
-  }
+export async function getRelease(tagName: string) {
+  const { data: release } = await octokit.rest.repos.getReleaseByTag({
+    owner: "microsoft",
+    repo: "vscode",
+    tag: tagName
+  });
+  return release;
+}
+
+export async function parseRelease(release: string) {
+  return release.length > 0
+    ? await getRelease(release)
+    : await getLatestRelease("microsoft", "vscode");
+}
+
+export async function getLatestRelease(owner: string, repo: string) {
   return (
     await getOctokit(GITHUB_TOKEN).rest.repos.getLatestRelease({
-      owner: "microsoft",
-      repo: "vscode"
+      owner,
+      repo
     })
-  ).data.tag_name;
+  ).data;
+}
+
+export async function getAllReleases(owner: string, repo: string) {
+  return (
+    await octokit.paginate("GET /repos/{owner}/{repo}/releases", {
+      owner,
+      repo,
+      per_page: 100
+    })
+  )
 }
 
 export async function clone(

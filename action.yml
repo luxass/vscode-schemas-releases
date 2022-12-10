@@ -8,7 +8,7 @@ inputs:
     description: 'Repository to build from'
     required: false
     default: 'microsoft/vscode'
-    
+
 runs:
   using: "node16"
   main: "dist/index.js"
