@@ -8,8 +8,13 @@ async function run(): Promise<void> {
       throw new Error("GITHUB_TOKEN not set");
     }
 
+    if (!process.env.ARCH) {
+      throw new Error("ARCH not set");
+    }
+
     const release: string = await getRelease(getInput("release"));
     info(`Release: ${release}`);
+
 
     const platform: string = getInput("platform");
     info(`Platform: ${platform}`);
@@ -23,11 +28,11 @@ async function run(): Promise<void> {
     await install();
     info("Installed dependencies");
 
-    await patch();
-    info(`Patched vscode`);
+    // await patch();
+    // info(`Patched vscode`);
 
-    await build(platform);
-    info("Building VSCode");
+    // await build(platform);
+    // info("Building VSCode");
 
   } catch (error) {
     setFailed(error.message);

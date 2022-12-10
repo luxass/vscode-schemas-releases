@@ -44,6 +44,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Download Linux Dependencies
+        if: runner.os == 'ubuntu-latest'
+        run: |
+          echo "Installing Linux dependencies"
       - name: Build Code
         uses: ./
         with:
