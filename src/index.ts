@@ -29,11 +29,11 @@ async function run(): Promise<void> {
     info(`Cloned ${repository} to vscode`);
 
     if (type === "copy-src") {
-      await exec("ls", ["-la", "../vscode"]);
+      await exec("ls", ["-la", "../"]);
       await artifactClient.uploadArtifact(
         "vscode-src",
         ["../vscode/src", "../vscode/extensions"],
-        "../vscode"
+        "../"
       );
       info("Uploaded artifact");
     } else {
