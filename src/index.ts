@@ -3,7 +3,7 @@ import { getInput, info, setFailed } from "@actions/core";
 import { exec } from "@actions/exec";
 import { patch } from "./patch";
 import { build, clone, getAllReleases, install, parseRelease } from "./utils";
-
+import glob from "@actions/glob";
 import("./env");
 
 const artifactClient = create();
@@ -29,11 +29,16 @@ async function run(): Promise<void> {
     info(`Cloned ${repository} to vscode`);
 
     if (type === "copy-src") {
-      await exec("ls", ["-la", "../"]);
+      const globber = await glob.create(
+        ["../vscode/src/**", "../vscode/extensions/**"].join("\n")
+      );
+      const files = await globber.glob();
+      console.log(files);
+      
       await artifactClient.uploadArtifact(
         "vscode-src",
-        ["src/", "extensions/"],
-        "../vscode"
+        ["../vscode/src/", "../vscode/extensions/"],
+        "."
       );
       info("Uploaded artifact");
     } else {
