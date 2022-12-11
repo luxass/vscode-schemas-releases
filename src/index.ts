@@ -32,7 +32,7 @@ async function run(): Promise<void> {
       await exec("ls", ["-la", "../vscode"]);
       await artifactClient.uploadArtifact(
         "vscode-src",
-        ["src", "extensions"],
+        ["../vscode/src", "../vscode/extensions"],
         "../vscode"
       );
       info("Uploaded artifact");
