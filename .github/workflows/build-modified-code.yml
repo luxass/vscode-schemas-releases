@@ -22,36 +22,36 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  build-windows:
-    name: Build - Windows
-    strategy:
-      fail-fast: false
-      matrix:
-        vscode_arch:
-          - x64
-          - ia32
-          - arm64
-    env:
-      VSCODE_ARCH: ${{ matrix.vscode_arch }}
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # build-windows:
+  #   name: Build - Windows
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       vscode_arch:
+  #         - x64
+  #         - ia32
+  #         - arm64
+  #   env:
+  #     VSCODE_ARCH: ${{ matrix.vscode_arch }}
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
 
-      - name: Build Code
-        uses: ./
-        with:
-          release: ${{ inputs.release }}
-          repository: microsoft/vscode
-      - name: ls
-        run: |
-          dir vscode
-          dir /a
+  #     - name: Build Code
+  #       uses: ./
+  #       with:
+  #         release: ${{ inputs.release }}
+  #         repository: microsoft/vscode
+  #     - name: ls
+  #       run: |
+  #         dir vscode
+  #         dir /a
   build-linux:
     name: Build - Linux
     strategy:
@@ -84,34 +84,34 @@ jobs:
         run: |
           ls vscode
           ls -la
-  build-macos:
-    name: Build - macOS
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - vscode_arch: x64
-    env:
-      VSCODE_ARCH: ${{ matrix.vscode_arch }}
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # build-macos:
+  #   name: Build - macOS
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       include:
+  #         - vscode_arch: x64
+  #   env:
+  #     VSCODE_ARCH: ${{ matrix.vscode_arch }}
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
 
-      - name: Build Code
-        uses: ./
-        with:
-          release: ${{ inputs.release }}
-          repository: microsoft/vscode
-      - name: ls
-        run: |
-          ls vscode
-          ls -la
+  #     - name: Build Code
+  #       uses: ./
+  #       with:
+  #         release: ${{ inputs.release }}
+  #         repository: microsoft/vscode
+  #     - name: ls
+  #       run: |
+  #         ls vscode
+  #         ls -la
   download-ts-files:
     name: Download TypeScript Files
     runs-on: ubuntu-latest
