@@ -45,8 +45,7 @@ export async function clone(
     "1",
     "--branch",
     release,
-    `https://github.com/${owner}/${repo}.git`,
-    "../vscode"
+    `https://github.com/${owner}/${repo}.git`
   ]);
 }
 
