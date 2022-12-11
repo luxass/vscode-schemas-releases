@@ -1,6 +1,5 @@
 import { create as createArtifactClient } from "@actions/artifact";
 import { getInput, info, setFailed } from "@actions/core";
-import { exec } from "@actions/exec";
 import { patch } from "./patch";
 import { build, clone, getAllReleases, install, parseRelease } from "./utils";
 import { create as createGlob } from "@actions/glob";
