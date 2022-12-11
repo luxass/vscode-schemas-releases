@@ -23,7 +23,7 @@ env:
 
 jobs:
   build-windows:
-    name: Build Modified Visual Studio Code - Windows
+    name: Build - Windows
     strategy:
       fail-fast: false
       matrix:
@@ -52,7 +52,7 @@ jobs:
         run: |
           ls ../vscode
   build-linux:
-    name: Build Modified Visual Studio Code - Linux
+    name: Build - Linux
     strategy:
       fail-fast: false
       matrix:
@@ -83,7 +83,7 @@ jobs:
         run: |
           ls ../vscode
   build-macos:
-    name: Build Modified Visual Studio Code - macOS
+    name: Build - macOS
     strategy:
       fail-fast: false
       matrix:
@@ -121,7 +121,7 @@ jobs:
         with:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
-          type: copy-files
+          type: copy-src
       # - name: Download TypeScript Files
       #   uses: actions/download-artifact@v2
       #   with:
