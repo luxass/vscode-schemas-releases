@@ -35,11 +35,9 @@ async function run(): Promise<void> {
         ["vscode/src/**", "vscode/extensions/**"].join("\n")
       );
       const files = await globber.glob();
-      console.log(files);
-      
       await artifactClient.uploadArtifact(
         "vscode-src",
-        ["vscode/src", "vscode/extensions"],
+        files,
         "."
       );
       info("Uploaded artifact");
