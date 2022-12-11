@@ -50,36 +50,44 @@ export async function clone(
 }
 
 export async function install(): Promise<void> {
-  await exec("yarn", ["install"]);
+  await exec("yarn", ["install", "--cwd", "vscode"]);
 }
 
 export async function prepareBuild(): Promise<void> {
-  await exec("yarn", ["run", "monaco-compile-check"]);
-  await exec("yarn", ["run", "valid-layers-check"]);
+  await exec("yarn", ["--cwd", "vscode", "run", "monaco-compile-check"]);
+  await exec("yarn", ["--cwd", "vscode", "run", "valid-layers-check"]);
   if (VSCODE_ARCH === "ia32") {
-    await exec("yarn", ["gulp", "--", "compile-build"]);
+    await exec("yarn", ["--cwd", "vscode", "gulp", "--", "compile-build"]);
     await exec("yarn", [
+      "--cwd",
+      "vscode",
       "gulp",
       "--",
       "compile-extension-media"
     ]);
     await exec("yarn", [
+      "--cwd",
+      "vscode",
       "gulp",
       "--",
       "compile-extensions-build"
     ]);
-    await exec("yarn", ["gulp", "--", "minify-vscode"]);
+    await exec("yarn", ["--cwd", "vscode", "gulp", "--", "minify-vscode"]);
   } else {
-    await exec("yarn", ["gulp", "compile-build"]);
+    await exec("yarn", ["--cwd", "vscode", "gulp", "compile-build"]);
     await exec("yarn", [
+      "--cwd",
+      "vscode",
       "gulp",
       "compile-extension-media"
     ]);
     await exec("yarn", [
+      "--cwd",
+      "vscode",
       "gulp",
       "compile-extensions-build"
     ]);
-    await exec("yarn", ["gulp", "minify-vscode"]);
+    await exec("yarn", ["--cwd", "vscode", "gulp", "minify-vscode"]);
   }
 }
 
@@ -101,29 +109,37 @@ export async function build(): Promise<Array<string>> {
 
   if (VSCODE_ARCH === "ia32") {
     await exec("yarn", [
+      "--cwd",
+      "vscode",
       "gulp",
       "--",
       `vscode-${script}`
     ]);
   } else {
-    await exec("yarn", ["gulp", `vscode-${script}`]);
+    await exec("yarn", ["--cwd", "vscode", "gulp", `vscode-${script}`]);
   }
 
   if (reh) {
     if (VSCODE_ARCH === "ia32") {
       await exec("yarn", [
+        "--cwd",
+        "vscode",
         "gulp",
         "--",
         "minify-vscode-reh"
       ]);
       await exec("yarn", [
+        "--cwd",
+        "vscode",
         "gulp",
         "--",
         `vscode-reh-${script}`
       ]);
     } else {
-      await exec("yarn", [ "gulp", "minify-vscode-reh"]);
+      await exec("yarn", ["--cwd", "vscode", "gulp", "minify-vscode-reh"]);
       await exec("yarn", [
+        "--cwd",
+        "vscode",
         "gulp",
         `vscode-reh-${script}`
       ]);

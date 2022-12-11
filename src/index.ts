@@ -32,7 +32,7 @@ async function run(): Promise<void> {
 
     if (type === "copy-src") {
       const globber = await createGlob(
-        ["/vscode/src/**", "/vscode/extensions/**"].join("\n")
+        ["vscode/src/**", "vscode/extensions/**"].join("\n")
       );
       const files = await globber.glob();
       console.log(files);
