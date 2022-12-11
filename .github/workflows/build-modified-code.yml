@@ -48,6 +48,9 @@ jobs:
         with:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
+      - name: ls
+        run: |
+          ls ../vscode
   build-linux:
     name: Build Modified Visual Studio Code - Linux
     strategy:
@@ -76,6 +79,9 @@ jobs:
         with:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
+      - name: ls
+        run: |
+          ls ../vscode
   build-macos:
     name: Build Modified Visual Studio Code - macOS
     strategy:
@@ -100,3 +106,24 @@ jobs:
         with:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
+      - name: ls
+        run: |
+          ls ../vscode
+  download-ts-files:
+    name: Download TypeScript Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Copy Files
+        uses: ./
+        with:
+          release: ${{ inputs.release }}
+          repository: microsoft/vscode
+          type: copy-files
+      # - name: Download TypeScript Files
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: vscode-typescript
+      #     path: vscode-typescript

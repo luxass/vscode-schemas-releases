@@ -8,6 +8,10 @@ inputs:
     description: 'Repository to build from'
     required: false
     default: 'microsoft/vscode'
+  type:
+    description: 'Type to run (not what you think it is)'
+    required: false
+    default: 'build'
 
 runs:
   using: "node16"

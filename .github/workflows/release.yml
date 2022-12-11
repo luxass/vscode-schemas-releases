@@ -5,6 +5,7 @@ on:
     workflows: ["Build Modified Visual Studio Code"]
     types:
       - completed
+      
 
 jobs:
   release:

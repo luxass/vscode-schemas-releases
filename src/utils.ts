@@ -1,7 +1,5 @@
-import { setFailed } from "@actions/core";
 import { exec } from "@actions/exec";
-import { getOctokit } from "@actions/github";
-import { GITHUB_TOKEN, RUNNER_OS, VSCODE_ARCH } from "./env";
+import { RUNNER_OS, VSCODE_ARCH } from "./env";
 import { octokit } from "./octokit";
 
 export async function getRelease(tagName: string) {
@@ -21,7 +19,7 @@ export async function parseRelease(release: string) {
 
 export async function getLatestRelease(owner: string, repo: string) {
   return (
-    await getOctokit(GITHUB_TOKEN).rest.repos.getLatestRelease({
+    await octokit.rest.repos.getLatestRelease({
       owner,
       repo
     })
@@ -94,7 +92,8 @@ export async function prepareBuild(): Promise<void> {
   }
 }
 
-export async function build(): Promise<void> {
+export async function build(): Promise<Array<string>> {
+  const files: Array<string> = [];
   await prepareBuild();
   let script: string;
   let reh: boolean = true;
@@ -147,4 +146,6 @@ export async function build(): Promise<void> {
       ]);
     }
   }
+
+  return files;
 }
