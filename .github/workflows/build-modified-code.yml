@@ -50,7 +50,7 @@ jobs:
           repository: microsoft/vscode
       - name: ls
         run: |
-          ls ../vscode
+          dir /vscode
   build-linux:
     name: Build - Linux
     strategy:
@@ -81,7 +81,7 @@ jobs:
           repository: microsoft/vscode
       - name: ls
         run: |
-          ls ../vscode
+          ls /vscode
   build-macos:
     name: Build - macOS
     strategy:
@@ -108,7 +108,7 @@ jobs:
           repository: microsoft/vscode
       - name: ls
         run: |
-          ls ../vscode
+          ls /vscode
   download-ts-files:
     name: Download TypeScript Files
     runs-on: ubuntu-latest

@@ -1,11 +1,9 @@
-import { create as createArtifactClient} from "@actions/artifact";
+import { create as createArtifactClient } from "@actions/artifact";
 import { getInput, info, setFailed } from "@actions/core";
 import { exec } from "@actions/exec";
 import { patch } from "./patch";
 import { build, clone, getAllReleases, install, parseRelease } from "./utils";
-import {
-  create as createGlob,
-} from "@actions/glob";
+import { create as createGlob } from "@actions/glob";
 import("./env");
 
 const artifactClient = createArtifactClient();
@@ -35,11 +33,7 @@ async function run(): Promise<void> {
         ["vscode/src/**", "vscode/extensions/**"].join("\n")
       );
       const files = await globber.glob();
-      await artifactClient.uploadArtifact(
-        "vscode-src",
-        files,
-        "."
-      );
+      await artifactClient.uploadArtifact("vscode-src", files, ".");
       info("Uploaded artifact");
     } else {
       await install();
