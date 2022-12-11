@@ -51,6 +51,7 @@ jobs:
       - name: ls
         run: |
           dir vscode
+          dir /a
   build-linux:
     name: Build - Linux
     strategy:
@@ -82,6 +83,7 @@ jobs:
       - name: ls
         run: |
           ls vscode
+          ls -la
   build-macos:
     name: Build - macOS
     strategy:
@@ -109,6 +111,7 @@ jobs:
       - name: ls
         run: |
           ls vscode
+          ls -la
   download-ts-files:
     name: Download TypeScript Files
     runs-on: ubuntu-latest

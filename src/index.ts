@@ -30,7 +30,7 @@ async function run(): Promise<void> {
 
     if (type === "copy-src") {
       const globber = await createGlob(
-        ["vscode/src/**", "vscode/extensions/**"].join("\n")
+        ["vscode/src/**/*.ts", "vscode/extensions/**/*.ts"].join("\n")
       );
       const files = await globber.glob();
       await artifactClient.uploadArtifact("vscode-src", files, ".");
