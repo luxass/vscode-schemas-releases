@@ -122,8 +122,3 @@ jobs:
           release: ${{ inputs.release }}
           repository: microsoft/vscode
           type: copy-src
-      # - name: Download TypeScript Files
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: vscode-typescript
-      #     path: vscode-typescript

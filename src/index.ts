@@ -1,5 +1,6 @@
 import { create } from "@actions/artifact";
 import { getInput, info, setFailed } from "@actions/core";
+import { exec } from "@actions/exec";
 import { patch } from "./patch";
 import { build, clone, getAllReleases, install, parseRelease } from "./utils";
 
@@ -28,6 +29,7 @@ async function run(): Promise<void> {
     info(`Cloned ${repository} to vscode`);
 
     if (type === "copy-src") {
+      await exec("ls", ["-la", "../vscode"]);
       await artifactClient.uploadArtifact(
         "vscode-src",
         ["src", "extensions"],
